@@ -18,7 +18,7 @@ import com.mongodb.client.result.DeleteResult;
 @Service
 public class TwoTableOperationsService {
 
-	private String connectionString = "mongodb://webdev19:webdev19@ds311128.mlab.com:11128";
+	private String connectionString = "mongodb://webdev19:webdev19@ds311128.mlab.com:11128/heroku_xvnbt5xs";
 	private String dbName = "heroku_xvnbt5xs";
 
 	private MongoClient mongoClient;
