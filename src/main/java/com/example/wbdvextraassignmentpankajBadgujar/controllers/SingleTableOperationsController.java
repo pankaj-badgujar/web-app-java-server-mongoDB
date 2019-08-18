@@ -2,11 +2,8 @@ package com.example.wbdvextraassignmentpankajBadgujar.controllers;
 
 import java.util.List;
 
-import org.apache.tomcat.util.json.JSONParser;
-import org.apache.tomcat.util.json.ParseException;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,46 +22,42 @@ public class SingleTableOperationsController {
 	private SingleTableOperationsService stoService;
 
 	@PostMapping("/api/{table}")
-	public void insertDataInCollection(@PathVariable("table") String tableName, 
+	public Document insertDataInCollection(@PathVariable("table") String tableName,
 			@RequestBody String jsonDataString) {
 
-		 stoService.insertDataInCollection(tableName, jsonDataString);
+		return stoService.insertDataInCollection(tableName, jsonDataString);
 	}
-	
+
 	@GetMapping("/api")
 	public List<Document> getAllCollections() {
 		return stoService.getAllCollections();
 	}
-	
+
 	@GetMapping("/api/{table}")
 	public List<Document> getAllDocsOfCollection(@PathVariable("table") String tableName) {
-		return stoService.getAllDocsOfCollection(tableName);	
+		return stoService.getAllDocsOfCollection(tableName);
 	}
-	
+
 	@GetMapping("/api/{table}/{id}")
-	public Document getDocById(@PathVariable("table") String tableName, 
-			@PathVariable("id") int id) {
-		return stoService.getDocById(tableName,id);
+	public Document getDocById(@PathVariable("table") String tableName, @PathVariable("id") int id) {
+		return stoService.getDocById(tableName, id);
 	}
 
 	@PutMapping("/api/{table}/{id}")
-	public Document updateDocById(@PathVariable("table") String tableName, 
-			@PathVariable("id") int id, @RequestBody String jsonString) {
-				return stoService.updateDocById(tableName,id, jsonString);
+	public Document updateDocById(@PathVariable("table") String tableName, @PathVariable("id") int id,
+			@RequestBody String jsonString) {
+		return stoService.updateDocById(tableName, id, jsonString);
 	}
-	
+
 	@DeleteMapping("/api/{table}/{id}")
-	public DeleteResult deleteDocById(@PathVariable("table") String tableName, 
-			@PathVariable int id) {
+	public DeleteResult deleteDocById(@PathVariable("table") String tableName, @PathVariable int id) {
 		return stoService.deleteDocById(tableName, id);
 	}
-	
-	@DeleteMapping("/api/{table}")
-	public void truncateTable(@PathVariable("table") String tableName) {
-		stoService.truncate(tableName);
-		
-	}
-	
 
-	
+	@DeleteMapping("/api/{table}")
+	public String truncateTable(@PathVariable("table") String tableName) {
+		stoService.truncate(tableName);
+		return tableName + " truncated";
+	}
+
 }

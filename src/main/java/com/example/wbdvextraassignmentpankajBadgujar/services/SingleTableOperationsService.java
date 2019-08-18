@@ -1,6 +1,7 @@
 package com.example.wbdvextraassignmentpankajBadgujar.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class SingleTableOperationsService {
 
 	private MongoClient mongoClient;
 
-	public void insertDataInCollection(String tableName, String jsonDataString) {
+	public Document insertDataInCollection(String tableName, String jsonDataString) {
 		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
@@ -45,17 +46,25 @@ public class SingleTableOperationsService {
 			doc.append("_id", id);
 		}
 		collection.insertOne(doc);
+		return doc;
 	}
 
 	public List<Document> getAllCollections() {
 		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
-
+			
+		
 		MongoIterable<Document> allCollections = db.listCollections();
 
+		
 		List<Document> collectionList = new ArrayList<Document>();
-		for (Document collectionName : allCollections) {
-			collectionList.add(collectionName);
+		String schema = "";
+		for (Document collection : allCollections) {
+			
+			for(String key :  collection.keySet()) {
+				schema.concat(key + " "+collection.get(key));
+			}
+			collectionList.add(collection);
 		}
 
 		return collectionList;
@@ -70,7 +79,6 @@ public class SingleTableOperationsService {
 		}
 
 		MongoCollection<Document> collection = db.getCollection(collectionName);
-
 		MongoIterable<Document> data = collection.find();
 		List<Document> docList = new ArrayList<Document>();
 		for (Document doc : data) {
@@ -144,16 +152,9 @@ public class SingleTableOperationsService {
 	
 	
 	
-	
-	
-
 	private boolean collectionExists(String collectionName) {
 		return mongoClient.getDatabase(dbName).listCollectionNames().into(new ArrayList<String>())
 				.contains(collectionName);
 	}
-
 	
-	
-
-
 }
