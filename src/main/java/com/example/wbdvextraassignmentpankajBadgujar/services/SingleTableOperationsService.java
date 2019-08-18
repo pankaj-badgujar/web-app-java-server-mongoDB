@@ -24,7 +24,7 @@ import com.mongodb.client.result.DeleteResult;
 @Service
 public class SingleTableOperationsService {
 
-	private String connectionString = "mongodb://webdev@su19:webdev@su19@ds311128.mlab.com:11128";
+	private String connectionString = "mongodb://webdev19:webdev19su19@ds311128.mlab.com:11128";
 	private String dbName = "heroku_xvnbt5xs";
 
 	private MongoClient mongoClient;
