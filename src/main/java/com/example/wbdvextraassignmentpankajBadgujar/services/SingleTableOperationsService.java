@@ -24,13 +24,12 @@ import com.mongodb.client.result.DeleteResult;
 @Service
 public class SingleTableOperationsService {
 
-	private String connectionString = "mongodb://webdev19:webdev19su19@ds311128.mlab.com:11128";
+//	private String connectionString = "mongodb://webdev19:webdev19su19@ds311128.mlab.com:11128";
 	private String dbName = "heroku_xvnbt5xs";
 
 	private MongoClient mongoClient;
 
 	public Document insertDataInCollection(String tableName, String jsonDataString) {
-		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(tableName)) {
@@ -50,7 +49,7 @@ public class SingleTableOperationsService {
 	}
 
 	public List<Document> getAllCollections() {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 			
 		
@@ -71,7 +70,7 @@ public class SingleTableOperationsService {
 	}
 
 	public List<Document> getAllDocsOfCollection(String collectionName) {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(collectionName)) {
@@ -88,7 +87,7 @@ public class SingleTableOperationsService {
 	}
 
 	public Document getDocById(String collectionName, int id) {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(collectionName)) {
@@ -105,7 +104,7 @@ public class SingleTableOperationsService {
 	}
 	
 	public Document updateDocById(String collectionName, int id, String jsonString) {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(collectionName)) {
@@ -124,7 +123,7 @@ public class SingleTableOperationsService {
 	}
 	
 	public DeleteResult deleteDocById(String collectionName, int id) {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(collectionName)) {
@@ -140,7 +139,7 @@ public class SingleTableOperationsService {
 	}
 	
 	public void truncate(String collectionName) {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 	    

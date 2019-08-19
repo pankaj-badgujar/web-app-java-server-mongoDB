@@ -18,7 +18,7 @@ import com.mongodb.client.result.DeleteResult;
 @Service
 public class TwoTableOperationsService {
 
-	private String connectionString = "mongodb://webdev19:webdev19@ds311128.mlab.com:11128/heroku_xvnbt5xs";
+
 	private String dbName = "heroku_xvnbt5xs";
 
 	private MongoClient mongoClient;
@@ -26,9 +26,8 @@ public class TwoTableOperationsService {
 	@Autowired
 	SingleTableOperationsService stoService;
 
-	public Document createMappingTable(String table1, String table2, int id1, int id2) {
-
-		mongoClient = MongoClients.create(connectionString);
+	public Document createMappingTable(String table1, String table2, int id1, int id2) {		
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(table1) || !collectionExists(table2)) {
@@ -57,7 +56,7 @@ public class TwoTableOperationsService {
 	}
 
 	public List<Document> getDocumentsFromTable2ByTable1Id(String table1, int id, String table2) {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(table1) || !collectionExists(table2)) {
@@ -85,7 +84,7 @@ public class TwoTableOperationsService {
 
 	public DeleteResult deleteRecordFromMappingTableByBothIds(String table1, String table2, int id1, int id2) {
 		
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(table1) || !collectionExists(table2)) {
@@ -104,7 +103,7 @@ public class TwoTableOperationsService {
 	}
 
 	public DeleteResult deleteRecordFromMappingTableByOneId(String table1, String table2, int id1) {
-		mongoClient = MongoClients.create(connectionString);
+//		mongoClient = MongoClients.create(connectionString);
 		MongoDatabase db = mongoClient.getDatabase(dbName);
 
 		if (!collectionExists(table1) || !collectionExists(table2)) {
